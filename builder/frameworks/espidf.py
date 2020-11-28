@@ -75,6 +75,11 @@ try:
     import future
     import pyparsing
     import cryptography
+    import gdbgui
+    import pygdbmi
+    import reedsolo
+    import bitstring
+    import ecdsa
 except ImportError:
     env.Execute(
         env.VerboseAction(
