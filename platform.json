@@ -86,7 +86,7 @@
       "type": "framework",
       "optional": true,
       "owner": "platformio",
-      "version": "~3.40100.0"
+      "version": "https://github.com/espressif/esp-idf.git#release/v4.2"
     },
     "framework-simba": {
       "type": "framework",
