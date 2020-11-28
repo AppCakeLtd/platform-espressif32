@@ -56,17 +56,17 @@ TOOLCHAIN_DIR = platform.get_package_dir(
 assert os.path.isdir(FRAMEWORK_DIR)
 
 # Arduino framework as a component is not compatible with ESP-IDF >=4.1
-if "arduino" in env.subst("$PIOFRAMEWORK"):
-    ARDUINO_FRAMEWORK_DIR = platform.get_package_dir("framework-arduinoespressif32")
-    # Possible package names in 'package@version' format is not compatible with CMake
-    if "@" in os.path.basename(ARDUINO_FRAMEWORK_DIR):
-        new_path = os.path.join(
-            os.path.dirname(ARDUINO_FRAMEWORK_DIR),
-            os.path.basename(ARDUINO_FRAMEWORK_DIR).replace("@", "-"),
-        )
-        os.rename(ARDUINO_FRAMEWORK_DIR, new_path)
-        ARDUINO_FRAMEWORK_DIR = new_path
-    assert ARDUINO_FRAMEWORK_DIR and os.path.isdir(ARDUINO_FRAMEWORK_DIR)
+# if "arduino" in env.subst("$PIOFRAMEWORK"):
+#     ARDUINO_FRAMEWORK_DIR = platform.get_package_dir("framework-arduinoespressif32")
+#     # Possible package names in 'package@version' format is not compatible with CMake
+#     if "@" in os.path.basename(ARDUINO_FRAMEWORK_DIR):
+#         new_path = os.path.join(
+#             os.path.dirname(ARDUINO_FRAMEWORK_DIR),
+#             os.path.basename(ARDUINO_FRAMEWORK_DIR).replace("@", "-"),
+#         )
+#         os.rename(ARDUINO_FRAMEWORK_DIR, new_path)
+#         ARDUINO_FRAMEWORK_DIR = new_path
+#     assert ARDUINO_FRAMEWORK_DIR and os.path.isdir(ARDUINO_FRAMEWORK_DIR)
 
 BUILD_DIR = env.subst("$BUILD_DIR")
 CMAKE_API_REPLY_PATH = os.path.join(".cmake", "api", "v1", "reply")
@@ -78,7 +78,7 @@ try:
 except ImportError:
     env.Execute(
         env.VerboseAction(
-            '$PYTHONEXE -m pip install "cryptography>=2.1.4" "future>=0.15.2" "pyparsing>=2.0.3,<2.4.0" ',
+            '$PYTHONEXE -m pip install "cryptography>=2.1.4" "future>=0.15.2" "pyparsing>=2.0.3,<2.4.0" "gdbgui==0.13.2.0" "pygdbmi<=0.9.0.2" "reedsolo>=1.5.3,<=1.5.4" "bitstring>=3.1.6" "ecdsa>=0.16.0"',
             "Installing ESP-IDF's Python dependencies",
         )
     )
